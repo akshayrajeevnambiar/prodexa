@@ -1,18 +1,22 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+// Add services to the container
+builder.Services.AddControllers(); // Ensure this line is present
 
 var app = builder.Build();
 
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
+    app.UseDeveloperExceptionPage(); // Optional for development purposes
 }
 
-app.UseHttpsRedirection(); // Ensures all requests are served over HTTPS.
+app.UseHttpsRedirection();
 
-app.UseAuthorization(); // Adds authorization middleware to check for user roles.
+app.UseRouting(); // Ensure routing middleware is added
 
-app.MapControllers(); // Maps incoming HTTP requests to controller actions.
+app.UseAuthorization();
+
+app.MapControllers(); // Ensure controllers are mapped
 
 app.Run();
